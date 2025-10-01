@@ -5,11 +5,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>UniverseThing | AgroPre - IoT Agricultura de Precisión</title>
   <meta name="description" content="AgroPre: Sistema IoT y visión artificial para protección de cultivos contra heladas y plagas. Agricultura de precisión sostenible." />
+  <!-- Fuentes unificadas -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Fuentes principales -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
-  <link href="https://fonts.cdnfonts.com/css/devil-breeze" rel="stylesheet">
+  <!-- Montserrat para títulos / Poppins para cuerpo -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <!-- Iconos -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- CSS principal -->
   <link rel="stylesheet" href="css/style.css">
@@ -28,15 +29,15 @@
         </div>
         <ul class="nav-links" id="navLinks">
           <li><a href="#problem">Problema</a></li>
-            <li><a href="#solution">Solución</a></li>
-            <li><a href="#testimonials">Testimonios</a></li>
-            <li><a href="#team">Equipo</a></li>
-            <li><a href="#contact" class="btn btn-primary">Contacto</a></li>
-            <li>
-              <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
-                <i class="fas fa-moon"></i>
-              </button>
-            </li>
+          <li><a href="#solution">Solución</a></li>
+          <li><a href="#testimonials">Testimonios</a></li>
+          <li><a href="#team">Equipo</a></li>
+          <li><a href="#contact" class="btn btn-primary">Contacto</a></li>
+          <li>
+            <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+              <i class="fas fa-moon"></i>
+            </button>
+          </li>
         </ul>
       </nav>
     </div>
@@ -74,7 +75,7 @@
             <i class="fas fa-temperature-low"></i>
           </div>
           <h3>Heladas Impredecibles</h3>
-          <p>Las heladas pueden destruir cosechas enteras en horas, generando pérdidas económicas devastadoras.</p>
+            <p>Las heladas pueden destruir cosechas enteras en horas, generando pérdidas económicas devastadoras.</p>
         </div>
         <div class="problem-card neon-box fade-in">
           <div class="problem-icon">
@@ -103,13 +104,11 @@
       <div class="solution-content">
         <div class="solution-text fade-in neon-box">
           <h3>Automatización Inteligente para Cultivos</h3>
-            <p>AgroPre integra sensores, visión artificial y analítica en tiempo real para transformar la gestión climática y biológica.</p>
-            <p>Sistema modular escalable con monitoreo constante, protección activa y plataforma digital centralizada.</p>
-            <a href="#contact" class="btn btn-primary" style="margin-top:20px;">Solicitar Información</a>
+          <p>AgroPre integra sensores, visión artificial y analítica en tiempo real para transformar la gestión climática y biológica.</p>
+          <p>Sistema modular escalable con monitoreo constante, protección activa y plataforma digital centralizada.</p>
+          <a href="#contact" class="btn btn-primary" style="margin-top:20px;">Solicitar Información</a>
         </div>
-        <div class="solution-visual fade-in neon-box">
-          <!-- Placeholder visual -->
-        </div>
+        <div class="solution-visual fade-in neon-box"></div>
       </div>
       <div class="solution-features">
         <div class="feature-card neon-box fade-in">
@@ -219,11 +218,11 @@
         </div>
         <div class="card-hover neon-box fade-in">
           <div class="card-hover-img" style="background-image:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1470&q=80');"></div>
-            <div class="card-hover-overlay">
-              <h3>Visión Artificial</h3>
-              <p>Detección de plagas y anomalías mediante IA embarcada.</p>
-              <a href="#" class="btn btn-primary btn-small">Ver más</a>
-            </div>
+          <div class="card-hover-overlay">
+            <h3>Visión Artificial</h3>
+            <p>Detección de plagas y anomalías mediante IA embarcada.</p>
+            <a href="#" class="btn btn-primary btn-small">Ver más</a>
+          </div>
         </div>
         <div class="card-hover neon-box fade-in">
           <div class="card-hover-img" style="background-image:url('https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=1471&q=80');"></div>
@@ -346,14 +345,13 @@
   <!-- Canvas 3D -->
   <div id="container3D" aria-hidden="true"></div>
 
-  <!-- Panel de control Neon (solo modo oscuro) -->
+  <!-- Panel Neon -->
   <div class="neon-control">
     <h4>Neon Hues</h4>
     <label>Hue 1 <input type="range" id="neonHue1" min="0" max="360" value="255"></label>
     <label>Hue 2 <input type="range" id="neonHue2" min="0" max="360" value="222"></label>
   </div>
 
-  <!-- JS -->
   <script type="module" src="js/script.js"></script>
 </body>
 </html>
