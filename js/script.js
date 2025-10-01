@@ -12,6 +12,7 @@ import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module
 import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
 import { gsap } from "https://cdn.skypack.dev/gsap";
 
+let forceLeafMotion = true;
 /* ========= THEME TOGGLE ========= */
 const themeToggle = document.getElementById('themeToggle');
 const themeIcon = themeToggle?.querySelector('i');
@@ -203,58 +204,123 @@ updateNeon();
 /* =========================================================
    Hojas (Wind)
    ========================================================= */
+/* =======================
+   Hojas con control toggle
+   ======================= */
+
 (function initLeaves(){
   const WIND_LEAF_COUNT = 160;
   const windContainer = document.querySelector('.wind');
   if (!windContainer) return;
 
-  for (let i=0; i<WIND_LEAF_COUNT; i++) {
+  // Cambia a false si quieres respetar la preferencia del sistema
+  let forceLeafMotion = true;
+
+  // Detecta preferencia de sistema (por si quisieras respetarla)
+  const systemReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let useReduced = systemReduce && !forceLeafMotion;
+
+  // Si ya había hojas (reinicializar)
+  windContainer.querySelectorAll('.leaf').forEach(l => l.remove());
+
+  const createdKeyframes = [];
+
+  function createLeaf(i){
     const leaf = document.createElement('div');
     leaf.className = 'leaf';
-    if (i%4===2) leaf.classList.add('variant-1');
-    if (i%8===3) leaf.classList.add('variant-2');
+    if (i % 4 === 2) leaf.classList.add('variant-1');
+    if (i % 8 === 3) leaf.classList.add('variant-2');
+
     const span = document.createElement('span');
 
-    const size = (Math.random()*0.35 + 0.15);
-    span.style.width = `${size}vmin`;
+    const size = (Math.random() * 0.35 + 0.15);
+    span.style.width  = `${size}vmin`;
     span.style.height = `${size}vmin`;
 
-    const hue = 20 + Math.random()*25;
-    const brightness = 0.6 + Math.random()*0.6;
+    const hue = 20 + Math.random() * 25;
+    const brightness = 0.6 + Math.random() * 0.6;
     span.style.filter = `hue-rotate(${hue}deg) brightness(${brightness}) drop-shadow(0 0 ${Math.random()*2}px var(--leaf-shadow))`;
 
-    const top = Math.random()*120;
+    const top = Math.random() * 120;
     leaf.style.top = `${top}vh`;
 
-    const speed = (5 + Math.random()*25).toFixed(2);
-    const delay = (Math.random()*-15).toFixed(2);
+    if (!useReduced) {
+      // Animación completa
+      const speed = (5 + Math.random() * 25).toFixed(2);
+      const delay = (Math.random() * -15).toFixed(2);
 
-    const driftKeyframes = `
-      @keyframes leaf-drift-${i} {
-        0% { transform:translate3d(0,0,0); }
-        100% { transform:translate3d(calc(100vw + 8vmin),0,0); }
-      }
-    `;
-    const styleEl = document.createElement('style');
-    styleEl.textContent = driftKeyframes;
-    document.head.appendChild(styleEl);
+      const keyName = `leaf-drift-${i}-${Date.now()}`;
+      const driftKeyframes = `
+        @keyframes ${keyName} {
+          0% { transform: translate3d(0,0,0); }
+          100% { transform: translate3d(calc(100vw + 8vmin),0,0); }
+        }
+      `;
+      createdKeyframes.push(driftKeyframes);
 
-    leaf.style.animation = `leaf-drift-${i} ${speed}s linear ${delay}s infinite`;
+      leaf.style.animation = `${keyName} ${speed}s linear ${delay}s infinite`;
 
-    const spinDuration = (0.5 + Math.random()*1.1).toFixed(2);
-    span.style.animation = `spin ${spinDuration}s ease-in-out 0s infinite alternate`;
+      const spinDuration = (0.5 + Math.random() * 1.1).toFixed(2);
+      span.style.animation = `spin ${spinDuration}s ease-in-out 0s infinite alternate`;
+    } else {
+      // Modo "quieto" (reduce motion): posiciona dentro de viewport
+      const leftPercent = Math.random() * 100;
+      leaf.style.left = `${leftPercent}vw`;
+      span.style.animation = 'none';
+      leaf.style.animation = 'none';
+    }
 
     leaf.appendChild(span);
     windContainer.appendChild(leaf);
   }
 
-  const directionZone = document.querySelector('.wind .direction');
-  directionZone?.addEventListener('mouseenter', () => {
-    windContainer.querySelectorAll('.leaf').forEach(l => l.style.animationDirection='reverse');
-  });
-  directionZone?.addEventListener('mouseleave', () => {
-    windContainer.querySelectorAll('.leaf').forEach(l => l.style.animationDirection='normal');
-  });
+  for (let i=0; i<WIND_LEAF_COUNT; i++){
+    createLeaf(i);
+  }
+
+  // Inyectar todos los keyframes en un solo <style> para performance
+  if (createdKeyframes.length){
+    const styleEl = document.createElement('style');
+    styleEl.textContent = createdKeyframes.join('\n');
+    document.head.appendChild(styleEl);
+  }
+
+  // Hover para invertir dirección (solo si animado)
+  if (!useReduced) {
+    const directionZone = document.querySelector('.wind .direction');
+    directionZone?.addEventListener('mouseenter', () => {
+      windContainer.querySelectorAll('.leaf').forEach(l => {
+        l.style.animationDirection = 'reverse';
+      });
+    });
+    directionZone?.addEventListener('mouseleave', () => {
+      windContainer.querySelectorAll('.leaf').forEach(l => {
+        l.style.animationDirection = 'normal';
+      });
+    });
+  }
+
+  // Toggle Play/Pause
+  const btn = document.getElementById('toggleLeaves');
+  if (btn){
+    let paused = false;
+    btn.addEventListener('click', () => {
+      paused = !paused;
+      btn.textContent = paused ? 'Reanudar Hojas' : 'Pausar Hojas';
+      windContainer.querySelectorAll('.leaf').forEach(leaf => {
+        leaf.style.animationPlayState = paused ? 'paused' : 'running';
+        const span = leaf.querySelector('span');
+        if (span) span.style.animationPlayState = paused ? 'paused' : 'running';
+      });
+    });
+  }
+
+  // Función para forzar reactivación si estaba en reduce-motion
+  window.forceLeafAnimation = function(){
+    if (!useReduced) return;
+    useReduced = false;
+    initLeaves(); // reconstruye con animación
+  };
 })();
 
 /* =========================================================
