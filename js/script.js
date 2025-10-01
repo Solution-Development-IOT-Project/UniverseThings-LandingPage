@@ -111,9 +111,9 @@ function loadBee() {
   const loader = new GLTFLoader();
   loader.load(
     // Modelo demon bee (más vistoso)
-    "https://raw.githubusercontent.com/DennysDionigi/bee-glb/94253437c023643dd868592e11a0fd2c228cfe07/demon_bee_full_texture.glb",
+    //"https://raw.githubusercontent.com/DennysDionigi/bee-glb/94253437c023643dd868592e11a0fd2c228cfe07/demon_bee_full_texture.glb",
     // Alternativa (descomenta para tu modelo original)
-    // "https://raw.githubusercontent.com/Solution-Development-IOT-Project/UniverseThings-LandingPage/3Dmodelo/Sin_nombre.glb",
+     "https://raw.githubusercontent.com/Solution-Development-IOT-Project/UniverseThings-LandingPage/3Dmodelo/Sin_nombre.glb",
     gltf => {
       bee = gltf.scene;
       bee.traverse(obj => {
