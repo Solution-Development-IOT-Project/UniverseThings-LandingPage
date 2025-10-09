@@ -208,125 +208,346 @@ updateNeon();
    Hojas con control toggle
    ======================= */
 
-(function initLeaves(){
+/* =========================================================
+   Sistema de Hojas Animadas
+   ========================================================= */
+(function initLeaves() {
   const WIND_LEAF_COUNT = 160;
   const windContainer = document.querySelector('.wind');
   if (!windContainer) return;
 
-  // Cambia a false si quieres respetar la preferencia del sistema
-  let forceLeafMotion = true;
-
-  // Detecta preferencia de sistema (por si quisieras respetarla)
-  const systemReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let useReduced = systemReduce && !forceLeafMotion;
-
-  // Si ya había hojas (reinicializar)
-  windContainer.querySelectorAll('.leaf').forEach(l => l.remove());
-
-  const createdKeyframes = [];
-
-  function createLeaf(i){
+  // Crear hojas con animación completa
+  function createLeaf(i) {
     const leaf = document.createElement('div');
     leaf.className = 'leaf';
+    
+    // Variantes para diversidad visual
     if (i % 4 === 2) leaf.classList.add('variant-1');
     if (i % 8 === 3) leaf.classList.add('variant-2');
 
     const span = document.createElement('span');
 
+    // Tamaño aleatorio
     const size = (Math.random() * 0.35 + 0.15);
-    span.style.width  = `${size}vmin`;
+    span.style.width = `${size}vmin`;
     span.style.height = `${size}vmin`;
 
+    // Color y efectos aleatorios
     const hue = 20 + Math.random() * 25;
     const brightness = 0.6 + Math.random() * 0.6;
-    span.style.filter = `hue-rotate(${hue}deg) brightness(${brightness}) drop-shadow(0 0 ${Math.random()*2}px var(--leaf-shadow))`;
+    span.style.filter = `hue-rotate(${hue}deg) brightness(${brightness}) drop-shadow(0 0 ${Math.random() * 2}px var(--leaf-shadow))`;
 
+    // Posición vertical aleatoria
     const top = Math.random() * 120;
     leaf.style.top = `${top}vh`;
 
-    if (!useReduced) {
-      // Animación completa
-      const speed = (5 + Math.random() * 25).toFixed(2);
-      const delay = (Math.random() * -15).toFixed(2);
+    // Animación de desplazamiento
+    const speed = (5 + Math.random() * 25).toFixed(2);
+    const delay = (Math.random() * -15).toFixed(2);
 
-      const keyName = `leaf-drift-${i}-${Date.now()}`;
-      const driftKeyframes = `
-        @keyframes ${keyName} {
-          0% { transform: translate3d(0,0,0); }
-          100% { transform: translate3d(calc(100vw + 8vmin),0,0); }
-        }
-      `;
-      createdKeyframes.push(driftKeyframes);
+    const keyName = `leaf-drift-${i}-${Date.now()}`;
+    const driftKeyframes = `
+      @keyframes ${keyName} {
+        0% { transform: translate3d(0, 0, 0); }
+        100% { transform: translate3d(calc(100vw + 8vmin), 0, 0); }
+      }
+    `;
+    
+    // Inyectar keyframes
+    const styleEl = document.createElement('style');
+    styleEl.textContent = driftKeyframes;
+    document.head.appendChild(styleEl);
 
-      leaf.style.animation = `${keyName} ${speed}s linear ${delay}s infinite`;
+    leaf.style.animation = `${keyName} ${speed}s linear ${delay}s infinite`;
 
-      const spinDuration = (0.5 + Math.random() * 1.1).toFixed(2);
-      span.style.animation = `spin ${spinDuration}s ease-in-out 0s infinite alternate`;
-    } else {
-      // Modo "quieto" (reduce motion): posiciona dentro de viewport
-      const leftPercent = Math.random() * 100;
-      leaf.style.left = `${leftPercent}vw`;
-      span.style.animation = 'none';
-      leaf.style.animation = 'none';
-    }
+    // Animación de giro
+    const spinDuration = (0.5 + Math.random() * 1.1).toFixed(2);
+    span.style.animation = `spin ${spinDuration}s ease-in-out 0s infinite alternate`;
 
     leaf.appendChild(span);
     windContainer.appendChild(leaf);
   }
 
-  for (let i=0; i<WIND_LEAF_COUNT; i++){
+  // Crear todas las hojas
+  for (let i = 0; i < WIND_LEAF_COUNT; i++) {
     createLeaf(i);
   }
 
-  // Inyectar todos los keyframes en un solo <style> para performance
-  if (createdKeyframes.length){
-    const styleEl = document.createElement('style');
-    styleEl.textContent = createdKeyframes.join('\n');
-    document.head.appendChild(styleEl);
-  }
-
-  // Hover para invertir dirección (solo si animado)
-  if (!useReduced) {
-    const directionZone = document.querySelector('.wind .direction');
-    directionZone?.addEventListener('mouseenter', () => {
+  // Control de dirección con hover
+  const directionZone = document.querySelector('.wind .direction');
+  if (directionZone) {
+    directionZone.addEventListener('mouseenter', () => {
       windContainer.querySelectorAll('.leaf').forEach(l => {
         l.style.animationDirection = 'reverse';
       });
     });
-    directionZone?.addEventListener('mouseleave', () => {
+    
+    directionZone.addEventListener('mouseleave', () => {
       windContainer.querySelectorAll('.leaf').forEach(l => {
         l.style.animationDirection = 'normal';
       });
     });
   }
 
-  // Toggle Play/Pause
-  const btn = document.getElementById('toggleLeaves');
-  if (btn){
+  // Botón de play/pause (opcional)
+  const createControlButton = () => {
+    const btn = document.createElement('button');
+    btn.textContent = 'Pausar Hojas';
+    btn.style.position = 'fixed';
+    btn.style.bottom = '20px';
+    btn.style.right = '20px';
+    btn.style.zIndex = '1000';
+    btn.style.padding = '10px 15px';
+    btn.style.background = 'var(--primary)';
+    btn.style.color = 'white';
+    btn.style.border = 'none';
+    btn.style.borderRadius = '5px';
+    btn.style.cursor = 'pointer';
+    
     let paused = false;
     btn.addEventListener('click', () => {
       paused = !paused;
       btn.textContent = paused ? 'Reanudar Hojas' : 'Pausar Hojas';
+      
       windContainer.querySelectorAll('.leaf').forEach(leaf => {
         leaf.style.animationPlayState = paused ? 'paused' : 'running';
         const span = leaf.querySelector('span');
         if (span) span.style.animationPlayState = paused ? 'paused' : 'running';
       });
     });
-  }
-
-  // Función para forzar reactivación si estaba en reduce-motion
-  window.forceLeafAnimation = function(){
-    if (!useReduced) return;
-    useReduced = false;
-    initLeaves(); // reconstruye con animación
+    
+    document.body.appendChild(btn);
   };
-})();
 
+  // Crear botón de control (opcional - descomenta si lo quieres)
+  // createControlButton();
+
+})();
 /* =========================================================
    INIT
    ========================================================= */
 window.addEventListener('DOMContentLoaded', () => {
   // Podrías lazy-load: setTimeout(initThree, 400);
   initThree();
+});
+
+/* =========================================================
+   Sistema de Multiidioma - Traducción en tiempo real
+   ========================================================= */
+
+const translations = {
+  es: {
+    // Navegación
+    "nav.problem": "Problema",
+    "nav.solution": "Solución", 
+    "nav.testimonials": "Testimonios",
+    "nav.team": "Equipo",
+    "nav.contact": "Contacto",
+    
+    // Hero
+    "hero.title": "Revolucionando la Agricultura con IoT y Visión Artificial",
+    "hero.description": "AgroPre es un sistema integral de monitoreo y automatización diseñado para optimizar el manejo de cultivos, con enfoque en la protección contra heladas y el control inteligente de plagas.",
+    "hero.cta1": "Conocer AgroPre", 
+    "hero.cta2": "Solicitar Demo",
+    
+    // Problema
+    "problem.title": "El Desafío Agrícola Actual",
+    "problem.card1.title": "Heladas Impredecibles",
+    "problem.card1.description": "Las heladas pueden destruir cosechas enteras en horas, generando pérdidas económicas devastadoras.",
+    "problem.card2.title": "Plagas Persistentes", 
+    "problem.card2.description": "Plagas como los Áfidos provocan daños progresivos difíciles de detectar a tiempo sin monitoreo.",
+    "problem.card3.title": "Métodos Tradicionales Ineficientes",
+    "problem.card3.description": "Intervenciones manuales reactivas implican altos costos y bajo control de riesgos.",
+    
+    // Solución
+    "solution.title": "Nuestra Solución: AgroPre",
+    "solution.subtitle": "Automatización Inteligente para Cultivos", 
+    "solution.description1": "AgroPre integra sensores, visión artificial y analítica en tiempo real para transformar la gestión climática y biológica.",
+    "solution.description2": "Sistema modular escalable con monitoreo constante, protección activa y plataforma digital centralizada.",
+    "solution.cta": "Solicitar Información",
+    "solution.feature1.title": "Monitoreo en Tiempo Real",
+    "solution.feature1.description": "Temperatura, humedad, imágenes y eventos críticos detectados automáticamente.",
+    "solution.feature2.title": "Automatización Inteligente",
+    "solution.feature2.description": "Actuadores activados por umbrales y modelos de detección de plagas.", 
+    "solution.feature3.title": "Plataforma Digital",
+    "solution.feature3.description": "Web y móvil con alertas, control remoto y registros históricos.",
+    "solution.feature4.title": "Sostenibilidad",
+    "solution.feature4.description": "Reducción de agua, químicos y mano de obra mediante precisión contextual.",
+    
+    // Testimonios
+    "testimonials.title": "Lo Que Dicen Nuestros Clientes",
+    "testimonials.card1.text": "\"Antes perdía cosecha por heladas. Con AgroPre recibo alertas y el sistema actúa. Ahora produzco con tranquilidad.\"",
+    "testimonials.card1.name": "Juan Pérez",
+    "testimonials.card1.role": "Agricultor de papa, Junín", 
+    "testimonials.card2.text": "\"La cooperativa ahora toma decisiones basadas en datos en tiempo real. Hemos reducido pérdidas y mejorado la coordinación.\"",
+    "testimonials.card2.name": "María Gonzales",
+    "testimonials.card2.role": "Gerente Cooperativa, Cusco",
+    "testimonials.card3.text": "\"La integración de monitoreo, visión e intervención automática simplifica la gestión técnica de los cultivos.\"", 
+    "testimonials.card3.name": "Carlos Rivas",
+    "testimonials.card3.role": "Ingeniero Agrónomo",
+    
+    // Banner
+    "banner.title": "Transforma tu Agricultura con Tecnología de Vanguardia",
+    "banner.description": "Únete a los agricultores que ya incrementan su productividad gracias a AgroPre.",
+    "banner.cta": "Comenzar Ahora",
+    
+    // Módulos
+    "modules.title": "Nuestros Módulos en Acción", 
+    "modules.card1.title": "Monitoreo Inteligente",
+    "modules.card1.description": "Sensores de ambiente y suelo con actualización constante.",
+    "modules.card2.title": "Visión Artificial",
+    "modules.card2.description": "Detección de plagas y anomalías mediante IA embarcada.",
+    "modules.card3.title": "Automatización", 
+    "modules.card3.description": "Riego, protección antihelada y fumigación inteligente.",
+    "modules.cta": "Ver más",
+    
+    // Equipo
+    "team.title": "Nuestro Equipo",
+    "team.role": "Ingeniero de Software",
+    "team.member1.description": "Especialista en Python, C++ y Assembler.",
+    "team.member2.description": "Experto en Python, C++ y Kotlin.", 
+    "team.member3.description": "Desarrollo de soluciones innovadoras.",
+    "team.member4.description": "Aplicaciones para agricultura de precisión.",
+    "team.member5.description": "Sistemas robustos para entornos agrícolas.",
+    
+    // CTA
+    "cta.title": "¿Listo para transformar tu agricultura?",
+    "cta.description": "Únete a la revolución de la agricultura de precisión con UniverseThing y descubre cómo AgroPre reduce pérdidas y aumenta rentabilidad.", 
+    "cta.cta": "Solicitar una Demo",
+    
+    // Footer
+    "footer.description": "Soluciones IoT para Agricultura de Precisión.",
+    "footer.links.title": "Enlaces",
+    "footer.contact.title": "Contacto", 
+    "footer.copyright": "Todos los derechos reservados."
+  },
+  
+  en: {
+    // Navigation
+    "nav.problem": "Problem",
+    "nav.solution": "Solution",
+    "nav.testimonials": "Testimonials", 
+    "nav.team": "Team",
+    "nav.contact": "Contact",
+    
+    // Hero
+    "hero.title": "Revolutionizing Agriculture with IoT and Computer Vision",
+    "hero.description": "AgroPre is a comprehensive monitoring and automation system designed to optimize crop management, focusing on frost protection and intelligent pest control.",
+    "hero.cta1": "Learn About AgroPre", 
+    "hero.cta2": "Request Demo",
+    
+    // Problem
+    "problem.title": "Current Agricultural Challenge", 
+    "problem.card1.title": "Unpredictable Frosts",
+    "problem.card1.description": "Frost can destroy entire crops in hours, generating devastating economic losses.",
+    "problem.card2.title": "Persistent Pests",
+    "problem.card2.description": "Pests like Aphids cause progressive damage that's difficult to detect in time without monitoring.", 
+    "problem.card3.title": "Inefficient Traditional Methods",
+    "problem.card3.description": "Reactive manual interventions involve high costs and low risk control.",
+    
+    // Solution
+    "solution.title": "Our Solution: AgroPre",
+    "solution.subtitle": "Smart Automation for Crops", 
+    "solution.description1": "AgroPre integrates sensors, computer vision and real-time analytics to transform climate and biological management.",
+    "solution.description2": "Scalable modular system with constant monitoring, active protection and centralized digital platform.",
+    "solution.cta": "Request Information",
+    "solution.feature1.title": "Real-time Monitoring",
+    "solution.feature1.description": "Temperature, humidity, images and critical events automatically detected.", 
+    "solution.feature2.title": "Smart Automation",
+    "solution.feature2.description": "Actuators activated by thresholds and pest detection models.",
+    "solution.feature3.title": "Digital Platform",
+    "solution.feature3.description": "Web and mobile with alerts, remote control and historical records.", 
+    "solution.feature4.title": "Sustainability",
+    "solution.feature4.description": "Reduction of water, chemicals and labor through contextual precision.",
+    
+    // Testimonials
+    "testimonials.title": "What Our Clients Say",
+    "testimonials.card1.text": "\"I used to lose crops to frost. With AgroPre I receive alerts and the system acts. Now I produce with peace of mind.\"", 
+    "testimonials.card1.name": "Juan Pérez",
+    "testimonials.card1.role": "Potato Farmer, Junín",
+    "testimonials.card2.text": "\"The cooperative now makes decisions based on real-time data. We have reduced losses and improved coordination.\"",
+    "testimonials.card2.name": "María Gonzales", 
+    "testimonials.card2.role": "Cooperative Manager, Cusco",
+    "testimonials.card3.text": "\"The integration of monitoring, vision and automatic intervention simplifies the technical management of crops.\"",
+    "testimonials.card3.name": "Carlos Rivas",
+    "testimonials.card3.role": "Agricultural Engineer", 
+    
+    // Banner
+    "banner.title": "Transform Your Agriculture with Cutting-Edge Technology",
+    "banner.description": "Join the farmers who are already increasing their productivity thanks to AgroPre.",
+    "banner.cta": "Get Started Now",
+    
+    // Modules
+    "modules.title": "Our Modules in Action", 
+    "modules.card1.title": "Smart Monitoring",
+    "modules.card1.description": "Environmental and soil sensors with constant updating.",
+    "modules.card2.title": "Computer Vision", 
+    "modules.card2.description": "Pest and anomaly detection through embedded AI.",
+    "modules.card3.title": "Automation",
+    "modules.card3.description": "Irrigation, anti-frost protection and smart fumigation.",
+    "modules.cta": "Learn More",
+    
+    // Team
+    "team.title": "Our Team", 
+    "team.role": "Software Engineer",
+    "team.member1.description": "Specialist in Python, C++ and Assembler.",
+    "team.member2.description": "Expert in Python, C++ and Kotlin.",
+    "team.member3.description": "Development of innovative solutions.", 
+    "team.member4.description": "Applications for precision agriculture.",
+    "team.member5.description": "Robust systems for agricultural environments.",
+    
+    // CTA
+    "cta.title": "Ready to transform your agriculture?",
+    "cta.description": "Join the precision agriculture revolution with UniverseThing and discover how AgroPre reduces losses and increases profitability.", 
+    "cta.cta": "Request a Demo",
+    
+    // Footer
+    "footer.description": "IoT Solutions for Precision Agriculture.",
+    "footer.links.title": "Links", 
+    "footer.contact.title": "Contact",
+    "footer.copyright": "All rights reserved."
+  }
+};
+
+let currentLanguage = 'es';
+
+function translatePage() {
+  const elements = document.querySelectorAll('[data-i18n]');
+  
+  elements.forEach(element => {
+    const key = element.getAttribute('data-i18n');
+    if (translations[currentLanguage] && translations[currentLanguage][key]) {
+      // Para elementos de entrada (input) usamos value, para otros textContent
+      if (element.tagName === 'INPUT') {
+        element.value = translations[currentLanguage][key];
+      } else {
+        element.textContent = translations[currentLanguage][key];
+      }
+    }
+  });
+  
+  // Actualizar el atributo lang del HTML
+  document.documentElement.lang = currentLanguage;
+}
+
+// Cambio de idioma
+const langToggleBtn = document.getElementById('lang-toggle');
+
+if (langToggleBtn) {
+  langToggleBtn.addEventListener('click', () => {
+    if (currentLanguage === 'es') {
+      currentLanguage = 'en';
+      langToggleBtn.textContent = 'Español';
+    } else {
+      currentLanguage = 'es';
+      langToggleBtn.textContent = 'English';
+    }
+
+    translatePage();
+  });
+}
+
+// Inicializar traducción al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+  translatePage();
 });
