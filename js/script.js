@@ -227,10 +227,13 @@ updateNeon();
 
     const span = document.createElement('span');
 
-    // Tamaño aleatorio
-    const size = (Math.random() * 0.35 + 0.15);
+    
+ // MEZCLA DE TAMAÑOS - algunas pequeñas, medianas y grandes
+const sizeOptions = [0.1, 0.2, 0.3, 0.75, 1.3];
+const size = sizeOptions[Math.floor(Math.random() * sizeOptions.length)];
     span.style.width = `${size}vmin`;
     span.style.height = `${size}vmin`;
+ 
 
     // Color y efectos aleatorios
     const hue = 20 + Math.random() * 25;
