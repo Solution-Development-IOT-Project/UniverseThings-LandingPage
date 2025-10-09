@@ -27,18 +27,21 @@
         <div class="menu-toggle" id="menuToggle">
           <i class="fas fa-bars"></i>
         </div>
-        <ul class="nav-links" id="navLinks">
-          <li><a href="#problem">Problema</a></li>
-          <li><a href="#solution">Solución</a></li>
-          <li><a href="#testimonials">Testimonios</a></li>
-          <li><a href="#team">Equipo</a></li>
-          <li><a href="#contact" class="btn btn-primary">Contacto</a></li>
-          <li>
-            <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
-              <i class="fas fa-moon"></i>
-            </button>
-          </li>
-        </ul>
+<ul class="nav-links" id="navLinks">
+  <li><a href="#problem" data-i18n="nav.problem">Problema</a></li>
+  <li><a href="#solution" data-i18n="nav.solution">Solución</a></li>
+  <li><a href="#testimonials" data-i18n="nav.testimonials">Testimonios</a></li>
+  <li><a href="#team" data-i18n="nav.team">Equipo</a></li>
+  <li><a href="#contact" class="btn btn-primary" data-i18n="nav.contact">Contacto</a></li>
+  <li class="lang-switch">
+    <button id="lang-toggle">English</button>
+  </li>
+  <li>
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+      <i class="fas fa-moon"></i>
+    </button>
+  </li>
+</ul>
       </nav>
     </div>
   </header>
@@ -53,11 +56,11 @@
     </div>
     <div class="container">
       <div class="hero-content">
-        <h1 data-before="AGROPRE">Revolucionando la Agricultura con IoT y Visión Artificial</h1>
-        <p>AgroPre es un sistema integral de monitoreo y automatización diseñado para optimizar el manejo de cultivos, con enfoque en la protección contra heladas y el control inteligente de plagas.</p>
+        <h1 data-before="AGROPRE" data-i18n="hero.title">Revolucionando la Agricultura con IoT y Visión Artificial</h1>
+        <p data-i18n="hero.description">AgroPre es un sistema integral de monitoreo y automatización diseñado para optimizar el manejo de cultivos, con enfoque en la protección contra heladas y el control inteligente de plagas.</p>
         <div>
-          <a href="#solution" class="btn btn-primary">Conocer AgroPre</a>
-          <a href="#contact" class="btn btn-secondary">Solicitar Demo</a>
+          <a href="#solution" class="btn btn-primary" data-i18n="hero.cta1">Conocer AgroPre</a>
+          <a href="#contact" class="btn btn-secondary" data-i18n="hero.cta2">Solicitar Demo</a>
         </div>
       </div>
     </div>
@@ -67,29 +70,29 @@
   <section class="problem" id="problem">
     <div class="container">
       <div class="section-title">
-        <h2>El Desafío Agrícola Actual</h2>
+        <h2 data-i18n="problem.title">El Desafío Agrícola Actual</h2>
       </div>
       <div class="problem-grid">
         <div class="problem-card neon-box fade-in">
           <div class="problem-icon">
             <i class="fas fa-temperature-low"></i>
           </div>
-          <h3>Heladas Impredecibles</h3>
-            <p>Las heladas pueden destruir cosechas enteras en horas, generando pérdidas económicas devastadoras.</p>
+          <h3 data-i18n="problem.card1.title">Heladas Impredecibles</h3>
+          <p data-i18n="problem.card1.description">Las heladas pueden destruir cosechas enteras en horas, generando pérdidas económicas devastadoras.</p>
         </div>
         <div class="problem-card neon-box fade-in">
           <div class="problem-icon">
             <i class="fas fa-bug"></i>
           </div>
-          <h3>Plagas Persistentes</h3>
-          <p>Plagas como los Áfidos provocan daños progresivos difíciles de detectar a tiempo sin monitoreo.</p>
+          <h3 data-i18n="problem.card2.title">Plagas Persistentes</h3>
+          <p data-i18n="problem.card2.description">Plagas como los Áfidos provocan daños progresivos difíciles de detectar a tiempo sin monitoreo.</p>
         </div>
         <div class="problem-card neon-box fade-in">
           <div class="problem-icon">
             <i class="fas fa-tools"></i>
           </div>
-          <h3>Métodos Tradicionales Ineficientes</h3>
-          <p>Intervenciones manuales reactivas implican altos costos y bajo control de riesgos.</p>
+          <h3 data-i18n="problem.card3.title">Métodos Tradicionales Ineficientes</h3>
+          <p data-i18n="problem.card3.description">Intervenciones manuales reactivas implican altos costos y bajo control de riesgos.</p>
         </div>
       </div>
     </div>
@@ -99,14 +102,14 @@
   <section class="solution" id="solution">
     <div class="container">
       <div class="section-title">
-        <h2>Nuestra Solución: AgroPre</h2>
+        <h2 data-i18n="solution.title">Nuestra Solución: AgroPre</h2>
       </div>
       <div class="solution-content">
         <div class="solution-text fade-in neon-box">
-          <h3>Automatización Inteligente para Cultivos</h3>
-          <p>AgroPre integra sensores, visión artificial y analítica en tiempo real para transformar la gestión climática y biológica.</p>
-          <p>Sistema modular escalable con monitoreo constante, protección activa y plataforma digital centralizada.</p>
-          <a href="#contact" class="btn btn-primary" style="margin-top:20px;">Solicitar Información</a>
+          <h3 data-i18n="solution.subtitle">Automatización Inteligente para Cultivos</h3>
+          <p data-i18n="solution.description1">AgroPre integra sensores, visión artificial y analítica en tiempo real para transformar la gestión climática y biológica.</p>
+          <p data-i18n="solution.description2">Sistema modular escalable con monitoreo constante, protección activa y plataforma digital centralizada.</p>
+          <a href="#contact" class="btn btn-primary" style="margin-top:20px;" data-i18n="solution.cta">Solicitar Información</a>
         </div>
         <div class="solution-visual fade-in neon-box"></div>
       </div>
@@ -115,29 +118,29 @@
           <div class="feature-icon">
             <i class="fas fa-satellite-dish"></i>
           </div>
-          <h3>Monitoreo en Tiempo Real</h3>
-          <p>Temperatura, humedad, imágenes y eventos críticos detectados automáticamente.</p>
+          <h3 data-i18n="solution.feature1.title">Monitoreo en Tiempo Real</h3>
+          <p data-i18n="solution.feature1.description">Temperatura, humedad, imágenes y eventos críticos detectados automáticamente.</p>
         </div>
         <div class="feature-card neon-box fade-in">
           <div class="feature-icon">
             <i class="fas fa-robot"></i>
           </div>
-          <h3>Automatización Inteligente</h3>
-          <p>Actuadores activados por umbrales y modelos de detección de plagas.</p>
+          <h3 data-i18n="solution.feature2.title">Automatización Inteligente</h3>
+          <p data-i18n="solution.feature2.description">Actuadores activados por umbrales y modelos de detección de plagas.</p>
         </div>
         <div class="feature-card neon-box fade-in">
           <div class="feature-icon">
             <i class="fas fa-mobile-alt"></i>
           </div>
-          <h3>Plataforma Digital</h3>
-          <p>Web y móvil con alertas, control remoto y registros históricos.</p>
+          <h3 data-i18n="solution.feature3.title">Plataforma Digital</h3>
+          <p data-i18n="solution.feature3.description">Web y móvil con alertas, control remoto y registros históricos.</p>
         </div>
         <div class="feature-card neon-box fade-in">
           <div class="feature-icon">
             <i class="fas fa-leaf"></i>
           </div>
-          <h3>Sostenibilidad</h3>
-          <p>Reducción de agua, químicos y mano de obra mediante precisión contextual.</p>
+          <h3 data-i18n="solution.feature4.title">Sostenibilidad</h3>
+          <p data-i18n="solution.feature4.description">Reducción de agua, químicos y mano de obra mediante precisión contextual.</p>
         </div>
       </div>
     </div>
@@ -147,36 +150,36 @@
   <section class="testimonials" id="testimonials">
     <div class="container">
       <div class="section-title">
-        <h2>Lo Que Dicen Nuestros Clientes</h2>
+        <h2 data-i18n="testimonials.title">Lo Que Dicen Nuestros Clientes</h2>
       </div>
       <div class="testimonials-grid">
         <div class="testimonial-card neon-box fade-in">
-          <p class="testimonial-text">"Antes perdía cosecha por heladas. Con AgroPre recibo alertas y el sistema actúa. Ahora produzco con tranquilidad."</p>
+          <p class="testimonial-text" data-i18n="testimonials.card1.text">"Antes perdía cosecha por heladas. Con AgroPre recibo alertas y el sistema actúa. Ahora produzco con tranquilidad."</p>
           <div class="testimonial-author">
             <div class="author-avatar">JP</div>
             <div class="author-info">
-              <h4>Juan Pérez</h4>
-              <p>Agricultor de papa, Junín</p>
+              <h4 data-i18n="testimonials.card1.name">Juan Pérez</h4>
+              <p data-i18n="testimonials.card1.role">Agricultor de papa, Junín</p>
             </div>
           </div>
         </div>
         <div class="testimonial-card neon-box fade-in">
-          <p class="testimonial-text">"La cooperativa ahora toma decisiones basadas en datos en tiempo real. Hemos reducido pérdidas y mejorado la coordinación."</p>
+          <p class="testimonial-text" data-i18n="testimonials.card2.text">"La cooperativa ahora toma decisiones basadas en datos en tiempo real. Hemos reducido pérdidas y mejorado la coordinación."</p>
           <div class="testimonial-author">
             <div class="author-avatar">MG</div>
             <div class="author-info">
-              <h4>María Gonzales</h4>
-              <p>Gerente Cooperativa, Cusco</p>
+              <h4 data-i18n="testimonials.card2.name">María Gonzales</h4>
+              <p data-i18n="testimonials.card2.role">Gerente Cooperativa, Cusco</p>
             </div>
           </div>
         </div>
         <div class="testimonial-card neon-box fade-in">
-          <p class="testimonial-text">"La integración de monitoreo, visión e intervención automática simplifica la gestión técnica de los cultivos."</p>
+          <p class="testimonial-text" data-i18n="testimonials.card3.text">"La integración de monitoreo, visión e intervención automática simplifica la gestión técnica de los cultivos."</p>
           <div class="testimonial-author">
             <div class="author-avatar">CR</div>
             <div class="author-info">
-              <h4>Carlos Rivas</h4>
-              <p>Ingeniero Agrónomo</p>
+              <h4 data-i18n="testimonials.card3.name">Carlos Rivas</h4>
+              <p data-i18n="testimonials.card3.role">Ingeniero Agrónomo</p>
             </div>
           </div>
         </div>
@@ -194,9 +197,9 @@
     </div>
     <div class="container">
       <div class="banner-content">
-        <h2>Transforma tu Agricultura con Tecnología de Vanguardia</h2>
-        <p>Únete a los agricultores que ya incrementan su productividad gracias a AgroPre.</p>
-        <a href="#contact" class="btn btn-primary">Comenzar Ahora</a>
+        <h2 data-i18n="banner.title">Transforma tu Agricultura con Tecnología de Vanguardia</h2>
+        <p data-i18n="banner.description">Únete a los agricultores que ya incrementan su productividad gracias a AgroPre.</p>
+        <a href="#contact" class="btn btn-primary" data-i18n="banner.cta">Comenzar Ahora</a>
       </div>
     </div>
   </section>
@@ -205,31 +208,31 @@
   <section class="card-hover-section" id="modules">
     <div class="container">
       <div class="section-title">
-        <h2>Nuestros Módulos en Acción</h2>
+        <h2 data-i18n="modules.title">Nuestros Módulos en Acción</h2>
       </div>
       <div class="card-hover-container">
         <div class="card-hover neon-box fade-in">
           <div class="card-hover-img" style="background-image:url('https://images.unsplash.com/photo-1595341888016-a392ef81b7de?auto=format&fit=crop&w=1479&q=80');"></div>
           <div class="card-hover-overlay">
-            <h3>Monitoreo Inteligente</h3>
-            <p>Sensores de ambiente y suelo con actualización constante.</p>
-            <a href="#" class="btn btn-primary btn-small">Ver más</a>
+            <h3 data-i18n="modules.card1.title">Monitoreo Inteligente</h3>
+            <p data-i18n="modules.card1.description">Sensores de ambiente y suelo con actualización constante.</p>
+            <a href="#" class="btn btn-primary btn-small" data-i18n="modules.cta">Ver más</a>
           </div>
         </div>
         <div class="card-hover neon-box fade-in">
           <div class="card-hover-img" style="background-image:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1470&q=80');"></div>
           <div class="card-hover-overlay">
-            <h3>Visión Artificial</h3>
-            <p>Detección de plagas y anomalías mediante IA embarcada.</p>
-            <a href="#" class="btn btn-primary btn-small">Ver más</a>
+            <h3 data-i18n="modules.card2.title">Visión Artificial</h3>
+            <p data-i18n="modules.card2.description">Detección de plagas y anomalías mediante IA embarcada.</p>
+            <a href="#" class="btn btn-primary btn-small" data-i18n="modules.cta">Ver más</a>
           </div>
         </div>
         <div class="card-hover neon-box fade-in">
           <div class="card-hover-img" style="background-image:url('https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=1471&q=80');"></div>
           <div class="card-hover-overlay">
-            <h3>Automatización</h3>
-            <p>Riego, protección antihelada y fumigación inteligente.</p>
-            <a href="#" class="btn btn-primary btn-small">Ver más</a>
+            <h3 data-i18n="modules.card3.title">Automatización</h3>
+            <p data-i18n="modules.card3.description">Riego, protección antihelada y fumigación inteligente.</p>
+            <a href="#" class="btn btn-primary btn-small" data-i18n="modules.cta">Ver más</a>
           </div>
         </div>
       </div>
@@ -240,47 +243,57 @@
   <section class="team" id="team">
     <div class="container">
       <div class="section-title">
-        <h2>Nuestro Equipo</h2>
+        <h2 data-i18n="team.title">Nuestro Equipo</h2>
       </div>
       <div class="team-grid">
         <div class="team-card neon-box fade-in">
-          <div class="team-img"><i class="fas fa-user"></i></div>
+          <div class="team-img">
+            <img src="images/GODOFREDO.png" alt="Godofredo Quispe Tipo - Ingeniero de Software">
+          </div>
           <div class="team-info">
             <h3 class="team-name">Godofredo Quispe Tipo</h3>
-            <p class="team-role">Ingeniero de Software</p>
-            <p>Especialista en Python, C++ y Assembler.</p>
+            <p class="team-role" data-i18n="team.role">Ingeniero de Software</p>
+            <p data-i18n="team.member1.description">Especialista en Python, C++ y Assembler.</p>
           </div>
         </div>
         <div class="team-card neon-box fade-in">
-          <div class="team-img"><i class="fas fa-user"></i></div>
+          <div class="team-img">
+            <img src="images/ERICK.png" alt="Erick Ruiz Torres - Ingeniero de Software">
+          </div>
           <div class="team-info">
             <h3 class="team-name">Erick Ruiz Torres</h3>
-            <p class="team-role">Ingeniero de Software</p>
-            <p>Experto en Python, C++ y Kotlin.</p>
+            <p class="team-role" data-i18n="team.role">Ingeniero de Software</p>
+            <p data-i18n="team.member2.description">Experto en Python, C++ y Kotlin.</p>
           </div>
         </div>
         <div class="team-card neon-box fade-in">
-          <div class="team-img"><i class="fas fa-user"></i></div>
+          <div class="team-img">
+            <img src="images/ANTHONY.jpg" alt="Anthony Loarte Matos - Ingeniero de Software">
+          </div>
           <div class="team-info">
             <h3 class="team-name">Anthony Loarte Matos</h3>
-            <p class="team-role">Ingeniero de Software</p>
-            <p>Desarrollo de soluciones innovadoras.</p>
+            <p class="team-role" data-i18n="team.role">Ingeniero de Software</p>
+            <p data-i18n="team.member3.description">Desarrollo de soluciones innovadoras.</p>
           </div>
         </div>
         <div class="team-card neon-box fade-in">
-          <div class="team-img"><i class="fas fa-user"></i></div>
+          <div class="team-img">
+            <img src="images/BRUCE.png" alt="Bruce Cipriano Chumbes - Ingeniero de Software">
+          </div>
           <div class="team-info">
             <h3 class="team-name">Bruce Cipriano Chumbes</h3>
-            <p class="team-role">Ingeniero de Software</p>
-            <p>Aplicaciones para agricultura de precisión.</p>
+            <p class="team-role" data-i18n="team.role">Ingeniero de Software</p>
+            <p data-i18n="team.member4.description">Aplicaciones para agricultura de precisión.</p>
           </div>
         </div>
         <div class="team-card neon-box fade-in">
-          <div class="team-img"><i class="fas fa-user"></i></div>
+          <div class="team-img">
+            <img src="images/JOSE.jpg" alt="Jose Riegas Salas - Ingeniero de Software">
+          </div>
           <div class="team-info">
             <h3 class="team-name">Jose Riegas Salas</h3>
-            <p class="team-role">Ingeniero de Software</p>
-            <p>Sistemas robustos para entornos agrícolas.</p>
+            <p class="team-role" data-i18n="team.role">Ingeniero de Software</p>
+            <p data-i18n="team.member5.description">Sistemas robustos para entornos agrícolas.</p>
           </div>
         </div>
       </div>
@@ -290,9 +303,9 @@
   <!-- CTA -->
   <section class="cta" id="contact">
     <div class="container">
-      <h2>¿Listo para transformar tu agricultura?</h2>
-      <p>Únete a la revolución de la agricultura de precisión con UniverseThing y descubre cómo AgroPre reduce pérdidas y aumenta rentabilidad.</p>
-      <a href="#contact" class="btn btn-primary">Solicitar una Demo</a>
+      <h2 data-i18n="cta.title">¿Listo para transformar tu agricultura?</h2>
+      <p data-i18n="cta.description">Únete a la revolución de la agricultura de precisión con UniverseThing y descubre cómo AgroPre reduce pérdidas y aumenta rentabilidad.</p>
+      <a href="#contact" class="btn btn-primary" data-i18n="cta.cta">Solicitar una Demo</a>
     </div>
   </section>
 
@@ -302,7 +315,7 @@
       <div class="footer-content">
         <div class="footer-column">
           <h3>UniverseThing</h3>
-          <p>Soluciones IoT para Agricultura de Precisión.</p>
+          <p data-i18n="footer.description">Soluciones IoT para Agricultura de Precisión.</p>
           <div class="social-links">
             <a href="#"><i class="fab fa-facebook-f"></i></a>
             <a href="#"><i class="fab fa-x-twitter"></i></a>
@@ -311,17 +324,17 @@
           </div>
         </div>
         <div class="footer-column">
-          <h3>Enlaces</h3>
+          <h3 data-i18n="footer.links.title">Enlaces</h3>
           <ul class="footer-links">
-            <li><a href="#problem">Problema</a></li>
-            <li><a href="#solution">Solución</a></li>
-            <li><a href="#testimonials">Testimonios</a></li>
-            <li><a href="#team">Equipo</a></li>
-            <li><a href="#contact">Contacto</a></li>
+            <li><a href="#problem" data-i18n="nav.problem">Problema</a></li>
+            <li><a href="#solution" data-i18n="nav.solution">Solución</a></li>
+            <li><a href="#testimonials" data-i18n="nav.testimonials">Testimonios</a></li>
+            <li><a href="#team" data-i18n="nav.team">Equipo</a></li>
+            <li><a href="#contact" data-i18n="nav.contact">Contacto</a></li>
           </ul>
         </div>
         <div class="footer-column">
-          <h3>Contacto</h3>
+          <h3 data-i18n="footer.contact.title">Contacto</h3>
           <ul class="footer-links">
             <li><i class="fas fa-envelope"></i> info@universething.com</li>
             <li><i class="fas fa-phone"></i> +51 123 456 789</li>
@@ -330,7 +343,7 @@
         </div>
       </div>
       <div class="copyright">
-        <p>&copy; 2025 UniverseThing. Todos los derechos reservados.</p>
+        <p>&copy; 2025 UniverseThing. <span data-i18n="footer.copyright">Todos los derechos reservados.</span></p>
       </div>
     </div>
   </footer>
