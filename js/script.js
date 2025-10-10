@@ -391,6 +391,7 @@ const translations = {
     // Navegación
     "nav.problem": "Problema",
     "nav.solution": "Solución", 
+    "nav.pricing": "Precios", 
     "nav.testimonials": "Testimonios",
     "nav.team": "Equipo",
     "nav.contact": "Contacto",
@@ -526,6 +527,7 @@ const translations = {
     // Navigation
     "nav.problem": "Problem",
     "nav.solution": "Solution",
+    "nav.pricing": "Pricing",
     "nav.testimonials": "Testimonials", 
     "nav.team": "Team",
     "nav.contact": "Contact",
