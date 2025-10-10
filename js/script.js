@@ -341,6 +341,53 @@ window.addEventListener('DOMContentLoaded', () => {
 
 const translations = {
   es: {
+
+    
+    // Pricing
+    "pricing.title": "Planes y Precios",
+    "pricing.subtitle": "Elige el plan perfecto para tus necesidades agrícolas",
+    
+    // Plan Gratuito
+    "pricing.free.name": "Gratuito",
+    "pricing.free.price": "S/ 0",
+    "pricing.free.period": "siempre gratis",
+    "pricing.free.feature1": "Monitoreo básico de temperatura",
+    "pricing.free.feature2": "Alertas por email",
+    "pricing.free.feature3": "Soporte básico",
+    "pricing.free.feature4": "1 estación de monitoreo",
+    "pricing.free.feature5": "App móvil básica",
+    "pricing.free.cta": "Comenzar Gratis",
+    
+    // Plan Profesional
+    "pricing.pro.name": "Profesional",
+    "pricing.pro.price": "S/ 99",
+    "pricing.pro.period": "por mes",
+    "pricing.pro.feature1": "Monitoreo avanzado completo",
+    "pricing.pro.feature2": "Alertas por SMS y app",
+    "pricing.pro.feature3": "Detección de plagas con IA",
+    "pricing.pro.feature4": "Hasta 5 estaciones",
+    "pricing.pro.feature5": "Soporte prioritario",
+    "pricing.pro.feature6": "Dashboard avanzado",
+    "pricing.pro.cta": "Prueba Gratis 14 días",
+    
+    // Plan Empresarial
+    "pricing.enterprise.name": "Empresarial",
+    "pricing.enterprise.price": "S/ 199",
+    "pricing.enterprise.period": "por mes",
+    "pricing.enterprise.feature1": "Solución completa AgroPre",
+    "pricing.enterprise.feature2": "Múltiples ubicaciones ilimitadas",
+    "pricing.enterprise.feature3": "API personalizada",
+    "pricing.enterprise.feature4": "Soporte dedicado 24/7",
+    "pricing.enterprise.feature5": "Capacitación incluida",
+    "pricing.enterprise.feature6": "Reportes personalizados",
+    "pricing.enterprise.cta": "Contactar Ventas",
+    
+    "pricing.most_popular": "Más Popular",
+    "pricing.recommended": "Recomendado",
+    "pricing.all_features": "Todos los features incluidos",
+    "pricing.money_back": "Garantía de 30 días sin riesgos",
+
+
     // Navegación
     "nav.problem": "Problema",
     "nav.solution": "Solución", 
@@ -395,8 +442,8 @@ const translations = {
     "testimonials.card3.role": "Ingeniero Agrónomo",
     
     // Banner
-    "banner.title": "Transforma tu Agricultura con Tecnología de Vanguardia",
-    "banner.description": "Únete a los agricultores que ya incrementan su productividad gracias a AgroPre.",
+    "banner.title": "Hoy es el día; hoy es tu destino. Elige tu camino, elige tu destino.",
+    "banner.description": "Elige el plan perfecto para tus necesidades agrícolas",
     "banner.cta": "Comenzar Ahora",
     
     // Módulos
@@ -431,6 +478,51 @@ const translations = {
   },
   
   en: {
+
+    // Pricing
+    "pricing.title": "Plans & Pricing",
+    "pricing.subtitle": "Choose the perfect plan for your agricultural needs",
+    
+    // Free Plan
+    "pricing.free.name": "Free",
+    "pricing.free.price": "S/ 0",
+    "pricing.free.period": "forever free",
+    "pricing.free.feature1": "Basic temperature monitoring",
+    "pricing.free.feature2": "Email alerts",
+    "pricing.free.feature3": "Basic support",
+    "pricing.free.feature4": "1 monitoring station",
+    "pricing.free.feature5": "Basic mobile app",
+    "pricing.free.cta": "Start Free",
+    
+    // Professional Plan
+    "pricing.pro.name": "Professional",
+    "pricing.pro.price": "S/ 99",
+    "pricing.pro.period": "per month",
+    "pricing.pro.feature1": "Complete advanced monitoring",
+    "pricing.pro.feature2": "SMS and app alerts",
+    "pricing.pro.feature3": "AI pest detection",
+    "pricing.pro.feature4": "Up to 5 stations",
+    "pricing.pro.feature5": "Priority support",
+    "pricing.pro.feature6": "Advanced dashboard",
+    "pricing.pro.cta": "Free 14-Day Trial",
+    
+    // Enterprise Plan
+    "pricing.enterprise.name": "Enterprise",
+    "pricing.enterprise.price": "S/ 199",
+    "pricing.enterprise.period": "per month",
+    "pricing.enterprise.feature1": "Complete AgroPre solution",
+    "pricing.enterprise.feature2": "Unlimited multiple locations",
+    "pricing.enterprise.feature3": "Custom API",
+    "pricing.enterprise.feature4": "24/7 dedicated support",
+    "pricing.enterprise.feature5": "Training included",
+    "pricing.enterprise.feature6": "Custom reports",
+    "pricing.enterprise.cta": "Contact Sales",
+    
+    "pricing.most_popular": "Most Popular",
+    "pricing.recommended": "Recommended",
+    "pricing.all_features": "All features included",
+    "pricing.money_back": "30-day money back guarantee",
+
     // Navigation
     "nav.problem": "Problem",
     "nav.solution": "Solution",
@@ -485,8 +577,8 @@ const translations = {
     "testimonials.card3.role": "Agricultural Engineer", 
     
     // Banner
-    "banner.title": "Transform Your Agriculture with Cutting-Edge Technology",
-    "banner.description": "Join the farmers who are already increasing their productivity thanks to AgroPre.",
+    "banner.title": "Today is the day; today is your destiny. Choose your path, choose your destiny.",
+    "banner.description": "Choose the perfect plan for your agricultural needs",
     "banner.cta": "Get Started Now",
     
     // Modules
