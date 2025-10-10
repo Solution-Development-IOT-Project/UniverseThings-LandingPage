@@ -607,10 +607,10 @@ function initCards3D() {
     const bg = slideshowWrap.querySelector('.card3d-bg');
     if (bg) {
       const images = [
-        'images/agropre1.jpeg',
-        'images/agropre2.jpeg',
-        'images/agropre3.jpeg',
-        'images/agropre4.jpeg'
+        './images/agropre1.jpeg',
+        './images/agropre2.jpeg',
+        './images/agropre3.jpeg',
+        './images/agropre4.jpeg'
       ];
       let idx = 0;
       let timer = null;
