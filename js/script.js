@@ -332,6 +332,7 @@ const size = sizeOptions[Math.floor(Math.random() * sizeOptions.length)];
 window.addEventListener('DOMContentLoaded', () => {
   // Podrías lazy-load: setTimeout(initThree, 400);
   initThree();
+  initCards3D();
 });
 
 /* =========================================================
@@ -376,6 +377,16 @@ const translations = {
     "solution.feature3.description": "Web y móvil con alertas, control remoto y registros históricos.",
     "solution.feature4.title": "Sostenibilidad",
     "solution.feature4.description": "Reducción de agua, químicos y mano de obra mediante precisión contextual.",
+    
+  // Solution 3D cards
+  "solution.cards.card1.title": "Sensor de Heladas",
+  "solution.cards.card1.desc": "Monitorea temperatura y activa protección.",
+  "solution.cards.card2.title": "Visión Artificial",
+  "solution.cards.card2.desc": "Detección temprana de plagas/anomalías.",
+  "solution.cards.card3.title": "Riego Inteligente",
+  "solution.cards.card3.desc": "Optimiza agua según humedad real.",
+  "solution.cards.card4.title": "Panel de Control",
+  "solution.cards.card4.desc": "Todo centralizado en tiempo real.",
     
     // Testimonios
     "testimonials.title": "Lo Que Dicen Nuestros Clientes",
@@ -462,6 +473,16 @@ const translations = {
     "solution.feature3.description": "Web and mobile with alerts, remote control and historical records.", 
     "solution.feature4.title": "Sustainability",
     "solution.feature4.description": "Reduction of water, chemicals and labor through contextual precision.",
+    
+  // Solution 3D cards
+  "solution.cards.card1.title": "Frost Sensor",
+  "solution.cards.card1.desc": "Monitors temperature and activates protection.",
+  "solution.cards.card2.title": "Computer Vision",
+  "solution.cards.card2.desc": "Early detection of pests/anomalies.",
+  "solution.cards.card3.title": "Smart Irrigation",
+  "solution.cards.card3.desc": "Optimizes water based on real moisture.",
+  "solution.cards.card4.title": "Control Panel",
+  "solution.cards.card4.desc": "Everything centralized in real time.",
     
     // Testimonials
     "testimonials.title": "What Our Clients Say",
@@ -554,3 +575,86 @@ if (langToggleBtn) {
 document.addEventListener('DOMContentLoaded', () => {
   translatePage();
 });
+
+/* =========================================================
+   3D Cards Hover (vanilla)
+   ========================================================= */
+function initCards3D() {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  const wraps = document.querySelectorAll('.card3d-wrap');
+  if (!wraps.length) return;
+  wraps.forEach(wrap => {
+    const card = wrap.querySelector('.card3d');
+    const bg = wrap.querySelector('.card3d-bg');
+    if (!card || !bg) return;
+    let rect;
+    const reset = () => {
+      card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+      bg.style.transform = 'translate3d(0,0,0)';
+    };
+    const onMove = e => {
+      if (prefersReduced || isTouch) return; // keep it calm on reduced-motion and touch
+      rect = rect || wrap.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5..0.5
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      const rotY = x * 30; // degrees
+      const rotX = -y * 30;
+      const tx = -x * 40; // px parallax
+      const ty = -y * 40;
+      card.style.transform = `rotateY(${rotY}deg) rotateX(${rotX}deg)`;
+      bg.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+    };
+    const onEnter = () => { rect = wrap.getBoundingClientRect(); };
+    const onLeave = () => { rect = null; reset(); };
+
+    wrap.addEventListener('mousemove', onMove);
+    wrap.addEventListener('mouseenter', onEnter);
+    wrap.addEventListener('mouseleave', onLeave);
+  });
+
+  // Simple slideshow for single card variant
+  const slideshowWrap = document.getElementById('card3d-slideshow');
+  if (slideshowWrap) {
+    const bg = slideshowWrap.querySelector('.card3d-bg');
+    if (bg) {
+      const images = [
+        'images/agropre1.jpeg',
+        'images/agropre2.jpeg',
+        'images/agropre3.jpeg',
+        'images/agropre4.jpeg'
+      ];
+      let idx = 0;
+      let timer = null;
+      const intervalMs = Math.max(500, parseInt(slideshowWrap.dataset.interval || '3500', 10));
+      const fadeMs = Math.max(0, parseInt(slideshowWrap.dataset.fade || '250', 10));
+      const setBg = (src) => {
+        // fade out then change then fade in
+        bg.style.opacity = '0.2';
+        setTimeout(() => {
+          bg.style.backgroundImage = `url(${src})`;
+          bg.style.opacity = '0.85';
+        }, fadeMs);
+      };
+      const start = () => {
+        if (prefersReduced) return;
+        stop();
+        timer = setInterval(() => {
+          idx = (idx + 1) % images.length;
+          setBg(images[idx]);
+        }, intervalMs);
+      };
+      const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+
+      // init first image immediately
+      bg.style.backgroundImage = `url(${images[0]})`;
+
+      // pause on hover of the whole card
+      slideshowWrap.addEventListener('mouseenter', stop);
+      slideshowWrap.addEventListener('mouseleave', start);
+
+      // start autoplay
+      start();
+    }
+  }
+}
