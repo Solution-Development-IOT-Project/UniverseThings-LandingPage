@@ -379,15 +379,9 @@ const translations = {
     "solution.feature4.description": "Reducción de agua, químicos y mano de obra mediante precisión contextual.",
     
   // Solution 3D cards
-  "solution.cards.card1.title": "Sensor de Heladas",
-  "solution.cards.card1.desc": "Monitorea temperatura y activa protección.",
-  "solution.cards.card2.title": "Visión Artificial",
-  "solution.cards.card2.desc": "Detección temprana de plagas/anomalías.",
-  "solution.cards.card3.title": "Riego Inteligente",
-  "solution.cards.card3.desc": "Optimiza agua según humedad real.",
-  "solution.cards.card4.title": "Panel de Control",
-  "solution.cards.card4.desc": "Todo centralizado en tiempo real.",
-    
+  "solution.cards.card1.title": "Proyección-UniverseThing",
+  "solution.cards.card1.desc": "Proyección de datos climáticos y de cultivos en tiempo real.",
+ 
     // Testimonios
     "testimonials.title": "Lo Que Dicen Nuestros Clientes",
     "testimonials.card1.text": "\"Antes perdía cosecha por heladas. Con AgroPre recibo alertas y el sistema actúa. Ahora produzco con tranquilidad.\"",
@@ -475,15 +469,9 @@ const translations = {
     "solution.feature4.description": "Reduction of water, chemicals and labor through contextual precision.",
     
   // Solution 3D cards
-  "solution.cards.card1.title": "Frost Sensor",
-  "solution.cards.card1.desc": "Monitors temperature and activates protection.",
-  "solution.cards.card2.title": "Computer Vision",
-  "solution.cards.card2.desc": "Early detection of pests/anomalies.",
-  "solution.cards.card3.title": "Smart Irrigation",
-  "solution.cards.card3.desc": "Optimizes water based on real moisture.",
-  "solution.cards.card4.title": "Control Panel",
-  "solution.cards.card4.desc": "Everything centralized in real time.",
-    
+  "solution.cards.card1.title": "Projection-UniverseThing",
+  "solution.cards.card1.desc": "Projection of climate and crop data in real time.",
+ 
     // Testimonials
     "testimonials.title": "What Our Clients Say",
     "testimonials.card1.text": "\"I used to lose crops to frost. With AgroPre I receive alerts and the system acts. Now I produce with peace of mind.\"", 
